@@ -1,0 +1,38 @@
+{
+  "manifest_version": 2,
+  "name": "AIConnect for Thunderbird",
+  "version": "0.2.2",
+  "description": "Lets the AIConnect CLI / MCP server (running on this machine) read, organize and automate your Thunderbird accounts over a local, token-paired WebSocket.",
+  "author": "Devidee B.V.",
+  "homepage_url": "https://github.com/devidee/aiconnect",
+  "applications": {
+    "gecko": {
+      "id": "aiconnect@devidee.nl",
+      "strict_min_version": "128.0"
+    }
+  },
+  "permissions": [
+    "accountsRead",
+    "accountsFolders",
+    "messagesRead",
+    "messagesMove",
+    "messagesDelete",
+    "messagesUpdate",
+    "messagesTags",
+    "storage",
+    "ws://127.0.0.1/*",
+    "ws://localhost/*"
+  ],
+  "background": {
+    "scripts": ["rpc.js", "background.js"],
+    "persistent": true
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "browser_action": {
+    "default_title": "AIConnect: connection settings",
+    "default_popup": "options.html"
+  }
+}

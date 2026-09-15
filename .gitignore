@@ -1,0 +1,19 @@
+# dependencies
+node_modules/
+
+# build output (the .xpi ships as a GitHub Release asset, not in the tree)
+dist/
+
+# local, user-specific mailbox plans and scans (personal data — never commit)
+plans/
+reports/
+*.scan.json
+
+# aiconnect runtime config (contains the pairing token)
+.aiconnect/
+config.json
+
+# logs / os cruft
+*.log
+.DS_Store
+Thumbs.db

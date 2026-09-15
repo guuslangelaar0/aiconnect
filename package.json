@@ -1,0 +1,41 @@
+{
+  "name": "aiconnect",
+  "version": "0.2.2",
+  "description": "CLI + MCP server that lets AI tools read, organize and automate Thunderbird mail accounts through a local extension bridge.",
+  "type": "module",
+  "bin": {
+    "aiconnect": "src/cli.js"
+  },
+  "files": [
+    "src",
+    "extension",
+    "skill",
+    "scripts",
+    "README.md"
+  ],
+  "scripts": {
+    "build:xpi": "node scripts/build-xpi.js",
+    "test": "node test/bridge.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "commander": "^12.1.0",
+    "ws": "^8.18.0",
+    "zod": "^3.23.8"
+  },
+  "license": "MIT",
+  "keywords": [
+    "thunderbird",
+    "email",
+    "mcp",
+    "cli",
+    "ai",
+    "automation"
+  ],
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  }
+}

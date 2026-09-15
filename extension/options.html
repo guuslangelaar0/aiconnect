@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>AIConnect</title>
+  <style>
+    body { font-family: -apple-system, Segoe UI, Arial, sans-serif; font-size: 13px; color: #1b1b1b; margin: 0; padding: 16px; min-width: 360px; background: #fafafa; }
+    h1 { font-size: 16px; margin: 0 0 4px; }
+    .sub { color: #666; margin-bottom: 14px; }
+    label { display: block; font-size: 12px; color: #444; margin: 10px 0 4px; }
+    input[type=text], input[type=number] { width: 100%; box-sizing: border-box; padding: 6px 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; font-family: Consolas, monospace; }
+    .row { display: flex; gap: 8px; margin-top: 12px; align-items: center; flex-wrap: wrap; }
+    button { cursor: pointer; padding: 6px 12px; border: 1px solid #999; background: #fff; border-radius: 4px; font-size: 13px; }
+    .status { padding: 8px 10px; border-radius: 4px; margin: 12px 0; font-weight: 600; }
+    .on { background: #e6f6ea; color: #1e6b32; }
+    .off { background: #fbeaea; color: #9b1c1c; }
+    pre { background: #f0f0f0; border: 1px solid #ddd; border-radius: 4px; padding: 8px; font-size: 11px; max-height: 220px; overflow: auto; white-space: pre-wrap; }
+    .hint { color: #666; font-size: 12px; margin-top: 10px; }
+    code { background: #eee; padding: 1px 4px; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <h1>AIConnect</h1>
+  <div class="sub">Local bridge between Thunderbird and the <code>aiconnect</code> CLI / MCP server.</div>
+
+  <div id="status" class="status off">Not connected</div>
+
+  <label for="ports">Bridge ports to try, in order (comma-separated; default 47800-47804)</label>
+  <input id="ports" type="text" autocomplete="off" spellcheck="false" placeholder="47800,47801,47802,47803,47804" />
+
+  <label for="token">Pairing token (run <code>aiconnect pair</code> to get it)</label>
+  <input id="token" type="text" autocomplete="off" spellcheck="false" />
+
+  <div class="row">
+    <label style="margin:0"><input id="enabled" type="checkbox" /> Enabled</label>
+    <button id="save">Save</button>
+    <button id="reconnect">Reconnect now</button>
+  </div>
+
+  <div class="hint">The extension only ever connects to 127.0.0.1 on this machine. Nothing leaves your computer unless the CLI or an AI tool you run sends it somewhere.</div>
+
+  <label>Log</label>
+  <pre id="log"></pre>
+
+  <script src="options.js"></script>
+</body>
+</html>
