@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.4
+- `archive --older-than 0` now means "every read message, regardless of age". It previously
+  fell back to the 365-day default, because `params.olderThanDays || 365` treats 0 as absent.
+- `--older-than` rejects non-numeric and negative values instead of passing `NaN` through,
+  which silently became the 365-day default.
+- `status` reports the installed extension version. It was read from a constant in `rpc.js`
+  that had to be bumped by hand alongside `manifest.json`, so it reported stale versions
+  after an upgrade; it now comes from `messenger.runtime.getManifest()`.
+
+## 0.2.3
+- Superseded by 0.2.4 (version reporting was still stale in this build).
+
 ## 0.2.2
 - Resumable, bounded rule application: `rules.run` remembers a scan cursor between calls
   and caps moves per call, so sorting completes on very large (25k+) inboxes even when the
