@@ -1,4 +1,12 @@
-# AIConnect
+# AIConnect — Thunderbird extension + CLI + MCP server
+
+[![Release](https://img.shields.io/github/v/release/guuslangelaar0/aiconnect?sort=semver)](https://github.com/guuslangelaar0/aiconnect/releases)
+[![Release workflow](https://img.shields.io/github/actions/workflow/status/guuslangelaar0/aiconnect/release.yml?label=build)](https://github.com/guuslangelaar0/aiconnect/actions/workflows/release.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Thunderbird 128+](https://img.shields.io/badge/Thunderbird-128%2B-0a84ff?logo=thunderbird&logoColor=white)](https://www.thunderbird.net/)
+[![Node 18+](https://img.shields.io/badge/Node-18%2B-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![MCP](https://img.shields.io/badge/MCP-server-6b4fbb)](https://modelcontextprotocol.io/)
+[![Built with Claude Code](https://img.shields.io/badge/built%20with-Claude%20Code-d97757)](https://claude.com/claude-code)
 
 Let AI tools (Claude Code, Claude Desktop, Cowork, anything that speaks MCP) and your shell read, organize
 and automate your Thunderbird accounts. Three parts:
@@ -14,20 +22,34 @@ can drive your mailbox.
 
 ## Install
 
+Not on npm yet — install from this repo.
+
 ```
-npm i -g aiconnect
+git clone https://github.com/guuslangelaar0/aiconnect.git
+cd aiconnect
+npm install
+npm link                            # optional: puts `aiconnect` on your PATH
+```
+
+Without `npm link`, run any command as `node dist/aiconnect.mjs <cmd>` (a prebuilt single-file
+bundle) or `node src/cli.js <cmd>`.
+
+```
 aiconnect pair                      # prints port + token; stored in ~/.aiconnect/config.json
 aiconnect build-xpi                 # writes dist/aiconnect-<version>.xpi
 ```
 
-Thunderbird → Add-ons and Themes → gear icon → *Install Add-on From File…* → pick the `.xpi`.
-Click the AIConnect toolbar button (or Add-ons → AIConnect → Preferences), enter the port and token, Save.
+Install the extension in Thunderbird: Add-ons and Themes → gear icon → *Install Add-on From File…*
+→ pick `dist/aiconnect-<version>.xpi` (or download it from the repo's Releases). Click the AIConnect
+toolbar button (or Add-ons → AIConnect → Preferences), enter the token, Save.
 
 ```
-aiconnect status                    # "connected: AIConnect extension 0.1.0 in Thunderbird 155.0.1"
+aiconnect status                    # "connected: AIConnect extension 0.2.2 in Thunderbird 155.0.1"
 ```
 
 For development, load `extension/` via Add-ons → gear → *Debug Add-ons* → *Load Temporary Add-on*.
+
+> Publishing to npm (so `npm i -g aiconnect` works) is planned but not done yet.
 
 ## Use
 

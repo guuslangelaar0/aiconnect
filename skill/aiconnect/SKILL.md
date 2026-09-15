@@ -74,11 +74,13 @@ on that account's inbox (or `sourceFolder` when given).
 
 ## Install / pairing (if the user has not done it)
 
+Not on npm yet — install from the repo (github.com/guuslangelaar0/aiconnect):
 ```
-npm i -g aiconnect            # or: npx aiconnect ...
+git clone https://github.com/guuslangelaar0/aiconnect.git && cd aiconnect && npm install && npm link
 aiconnect pair                # prints port + token, writes ~/.aiconnect/config.json
-aiconnect build-xpi           # dist/aiconnect-<version>.xpi
+aiconnect build-xpi           # dist/aiconnect-<version>.xpi (or grab it from Releases)
 ```
+Without `npm link`, run `node dist/aiconnect.mjs <cmd>` instead of `aiconnect <cmd>`.
 Thunderbird: Add-ons and Themes → gear → Install Add-on From File → the .xpi. Open the AIConnect
 options (toolbar button), paste port + token, Save. `aiconnect status` should now say connected.
 For MCP: `{"mcpServers":{"aiconnect":{"command":"aiconnect","args":["mcp"]}}}`.
