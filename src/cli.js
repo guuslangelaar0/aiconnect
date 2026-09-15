@@ -239,10 +239,17 @@ program.command("archive <account>")
   .option("--include-flagged", "also archive flagged messages")
   .option("--source <path>", "source folder instead of the inbox")
   .option("--yes", "actually move")
-  .action((account, opts) => run(async (b) => out(await api.runArchive(b, {
-    account, olderThanDays: Number(opts.olderThan), dest: opts.to, byYear: !!opts.byYear,
-    readOnly: !opts.includeUnread, skipFlagged: !opts.includeFlagged, sourceFolder: opts.source, apply: !!opts.yes, onProgress: progressPrinter()
-  }), fmt.renderArchiveReport)));
+  .action((account, opts) => run(async (b) => {
+    const olderThanDays = Number(opts.olderThan);
+    if (!Number.isFinite(olderThanDays) || olderThanDays < 0) {
+      console.error(`--older-than must be a number of days >= 0 (got "${opts.olderThan}")`);
+      process.exit(4);
+    }
+    return out(await api.runArchive(b, {
+      account, olderThanDays, dest: opts.to, byYear: !!opts.byYear,
+      readOnly: !opts.includeUnread, skipFlagged: !opts.includeFlagged, sourceFolder: opts.source, apply: !!opts.yes, onProgress: progressPrinter()
+    }), fmt.renderArchiveReport);
+  }));
 
 /* ---------- mcp / misc ---------- */
 

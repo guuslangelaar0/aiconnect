@@ -1,6 +1,6 @@
 {
   "name": "aiconnect",
-  "version": "0.2.2",
+  "version": "0.2.4",
   "description": "CLI + MCP server that lets AI tools read, organize and automate Thunderbird mail accounts through a local extension bridge.",
   "type": "module",
   "bin": {

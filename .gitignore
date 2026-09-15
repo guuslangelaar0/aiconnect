@@ -17,3 +17,12 @@ config.json
 *.log
 .DS_Store
 Thumbs.db
+
+# personal mailbox sorting rules (real addresses/domains — never commit)
+rules.json
+*.rules.json
+
+# local setup helpers (setup.cmd embeds the pairing token)
+setup.cmd
+setup-mcp.cmd
+publish.cmd

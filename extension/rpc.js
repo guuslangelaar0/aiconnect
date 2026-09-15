@@ -5,7 +5,11 @@
  */
 
 const AIC = {
-  VERSION: "0.2.2",
+  /* Read from the manifest so it can never drift from the installed version -- a hardcoded
+     copy here made `aiconnect status` report a stale version after an upgrade. */
+  VERSION: (() => {
+    try { return messenger.runtime.getManifest().version; } catch (e) { return "unknown"; }
+  })(),
   LOG: "[AIConnect]",
 
   /* Resumable-scan state, kept in the background page across RPC calls so a huge inbox is walked in
@@ -643,7 +647,9 @@ const AIC = {
       const account = await AIC.getAccount(params.account);
       const source = params.sourceFolder ? await AIC.resolveFolder({ account: account.id, path: params.sourceFolder }) : AIC.findInbox(account);
       if (!source) throw new Error("no source folder");
-      const days = params.olderThanDays || 365;
+      // 0 is a valid age ("everything read, regardless of date"), so only a missing/invalid
+      // value falls back to the default -- `||` would turn 0 into 365.
+      const days = Number.isFinite(params.olderThanDays) && params.olderThanDays >= 0 ? params.olderThanDays : 365;
       const cutoff = Date.now() - days * 864e5;
       const readOnly = params.readOnly !== false;
       const byYear = !!params.byYear;
